@@ -1,7 +1,19 @@
 
 const fetch = require('node-fetch')
 
+function check(url, invocationParameters,  expectedResultData, expectedResultStatus) {
 
+    const checkResult = { // this is the object you need to set and return
+        urlChecked: url,
+        resultData: null,
+        resultStatus: null,
+        statusTestPassed: null,
+        resultDataAsExpected: null
+    }
+
+
+
+}
 
 
 // funzione che confronta due oggetti semplici e verifica se actual contiene tutti gli attributi di expected, e se per
