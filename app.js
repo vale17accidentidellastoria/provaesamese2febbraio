@@ -10,8 +10,11 @@ app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000));
 
 app.post('/check', function(req,res) {
-	//console.log(req.body.url);
 	//check('https://localhost:5000/count', {"lato1":5, "lato2":7}, {"count": 3}, 200)
+	console.log(req.body.url);
+	console.log(req.body.invocationParameters);
+	console.log(req.body.expectedResultData);
+	console.log(req.body.expectedResultStatus);
 	check(req.body.url, req.body.invocationParameters, req.body.expectedResultData, req.body.expectedResultStatus)
 	.then(result => {
 		res.status(200).json(result)
