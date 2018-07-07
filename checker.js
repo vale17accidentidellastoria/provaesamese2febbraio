@@ -11,6 +11,28 @@ function check(url, invocationParameters,  expectedResultData, expectedResultSta
         resultDataAsExpected: null
     }
 
+    const parameters = Object.keys(invocationParameters);
+
+    if(parameters.length > 0) {
+    	checkResult.urlChecked += '&' + parameters[0] + "=" + encodeURI(invocationParameters[parameters[0]]);
+
+    	for(let i = 1; i < parameters.length; ++i) {
+    		checkResult.urlChecked += '&' + parameters[i] + "=" + encodeURI(invocationParameters[parameters[i]]);
+    	}
+    }
+
+    return fetch(checkResult.urlChecked)
+    	.then(response => {
+    		checkResult.resultStatus = response.status;
+    		checkResult.statusTestPassed = (checkResult.resultStatus === expectedResultStatus);
+    		return response.json;
+    	})
+    	.then(jsonResult => {
+    		checkResult.resultData = jsonResult;
+    		checkResult.resultDataAsExpected = compareResults(expectedResultData, checkResult.resultData);
+    		return checkResult;
+    	});
+
 
 
 }
